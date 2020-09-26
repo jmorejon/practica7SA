@@ -1,0 +1,51 @@
+buildscript {
+	ext {
+		springBootVersion = '2.1.1.RELEASE'
+        cpdVersion = '1.0'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath("de.aaschmid:gradle-cpd-plugin:${cpdVersion}")
+	}
+
+}
+
+
+
+plugins {
+	id "org.sonarqube" version "2.6"
+	id "de.aaschmid.cpd" version "1.0"
+}
+
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+apply plugin: 'checkstyle'
+apply plugin: 'pmd'
+apply plugin: 'cpd'
+apply plugin: 'findbugs'
+
+group = 'com.heowc'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-web')
+	testCompile('org.seleniumhq.selenium:htmlunit-driver')
+	testCompile('org.seleniumhq.selenium:selenium-java')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+checkstyle {
+	toolVersion = '8.8'
+}
